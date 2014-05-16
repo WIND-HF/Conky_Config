@@ -73,17 +73,15 @@ ${color CC9900}SYSTEM ${hr 2}$color
 $nodename $sysname $kernel on $machine
 
 ${color CC9900}CPU ${hr 2}$color
-WTF
-
 Total CPU: ${cpu cpu0}%
 ${color 597DB2}${cpubar}$color
 ${cpugraph 000000 597DB2}
-Core 1: ${freq 1} MHz        Temprature: $color ${exec sensors|grep 'Core0'|awk '{print $3}'}
+Core 1: ${freq 1} MHz        Temprature: $color ${exec sensors|grep 'Core 0'|awk '{print $3}'}
 ${cpu cpu1}% ${color 597DB2}${cpubar cpu1}$color
-Core 2: ${freq 2} MHz        Temprature: $color ${exec sensors|grep 'Core1'|awk '{print $3}'}
+Core 2: ${freq 2} MHz        Temprature: $color ${exec sensors|grep 'Core 1'|awk '{print $3}'}
 ${cpu cpu2}% ${color 597DB2}${cpubar cpu2}$color
 
-NAME            PID  CPU%   MEM%
+NAME               PID   CPU%   MEM%
 ${color CCFFFF}${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
 ${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
 ${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
@@ -95,39 +93,47 @@ RAM Used: ${mem}    RAM Free: ${memfree}/ ${memmax}
 Swap: $swapperc%   ${color FF6600} ${swapbar 6}$color
 
 ${color CC9900}DISK ${hr 2}$color
-sdc5 ${fs_type} (Root): ${fs_free_perc /}% ${color FFFF33} ${fs_bar 6 /}$color
-sdc1 NTFS (Data): ${fs_free_perc /media/data}% ${color FFFF33} ${fs_bar 6 /media/data}$color
-
-${if_up eth1}:
+${diskiograph 000000 597DB2}
+NAME  Type   Read    Write ${alignr}USED(%)
+${color FFFF33}\
+Root ${fs_type /}: ${diskio_read /dev/sda6} ${diskio_write /dev/sda6} \
+${alignr}${fs_used /}(${fs_used_perc /}%)
+${fs_bar /}
+${color FFFF33}Home   ${fs_type /home}: ${diskio_read /dev/sda8} ${diskio_write /dev/sda8} \
+${alignr}${fs_used /home}(${fs_used_perc /home}%)
+${fs_bar /home}\
+$color
+#eth1
+${if_up eth1}\
 ${color CC9900}NETWORK (${addr eth1}) ${hr 2}$color
-Down: $color${downspeed eth1} k/s ${alignr}Up: ${upspeed eth1} k/s
+Down: $color${downspeed eth1} ${alignr}Up: ${upspeed eth1}
 ${downspeedgraph eth1 25,140 000000 ff0000} ${alignr}${upspeedgraph eth1
 25,140 000000 00ff00}$color
 Total: ${totaldown eth1} ${alignr}Total: ${totalup eth1}
 Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768
-61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}
+61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}\
 ${endif}
-
-${if_up eth2}:
+# eth2
+${if_up eth2}\
 ${color CC9900}NETWORK (${addr eth2}) ${hr 2}$color
-Down: $color${downspeed eth2} k/s ${alignr}Up: ${upspeed eth2} k/s
+Down: $color${downspeed eth2} ${alignr}Up: ${upspeed eth2}
 ${downspeedgraph eth2 25,140 000000 ff0000} ${alignr}${upspeedgraph eth2
 25,140 000000 00ff00}$color
 Total: ${totaldown eth2} ${alignr}Total: ${totalup eth2}
 Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768
-61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}
+61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}\
 ${endif}
-
-${if_up eth3}:
+# eth3
+${if_up eth3}\
 ${color CC9900}NETWORK (${addr eth3}) ${hr 2}$color
-Down: $color${downspeed eth3} k/s ${alignr}Up: ${upspeed eth3} k/s
+Down: $color${downspeed eth3} ${alignr}Up: ${upspeed eth3}
 ${downspeedgraph eth3 25,140 000000 ff0000} ${alignr}${upspeedgraph eth3
 25,140 000000 00ff00}$color
 Total: ${totaldown eth3} ${alignr}Total: ${totalup eth3}
 Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768
-61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}
+61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}\
 ${endif}
-
+# LOGGINE
 ${color CC9900}LOGGING ${hr 2}$color
 ${color 339900}${execi 30 tail -n3 /var/log/messages | fold -w50}$color
 
