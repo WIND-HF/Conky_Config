@@ -22,7 +22,9 @@ double_buffer yes
 
 # fiddle with window
 use_spacer yes
-use_xft no
+use_xft yes
+
+xftfont 方正准园_GBK:size=10
 
 # Update interval in seconds
 update_interval 3.0
@@ -39,7 +41,6 @@ draw_shades no
 # Text stuff
 draw_outline no # amplifies text if yes
 draw_borders no
-font Droid Sans Mono
 uppercase no # set to yes if you want all text to be in uppercase
 
 # Stippled borders?
@@ -69,6 +70,9 @@ gap_y 10
 
 TEXT
 $color
+${color CC9900}${exec echo '这里是上条当麻保护协会'} ${hr 2}$color
+I'll be here forever
+
 ${color CC9900}SYSTEM ${hr 2}$color
 $nodename $sysname $kernel on $machine
 
