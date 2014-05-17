@@ -93,12 +93,25 @@ Artist: $alignc$color2${moc_artist}$color
  Album: $alignc$color2${moc_album}$color
 
   Time: $alignr${color EEEE44}${moc_curtime}/${moc_totaltime}$color
-${endif}
+$else\
+
+
+
+
+
+
+
+${endif}\
 ${if_running audacious}\
 [audacious]: $alignr$color1${audacious_status}$color
  Title: $alignc$color2${audacious_title 50}$color
 ${audacious_bar}
  $alignr${color EEEE44}${audacious_position}/${audacious_length}$color
+$else\
+
+
+
+
 ${endif}\
 
 #${time}
