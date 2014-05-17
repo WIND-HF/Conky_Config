@@ -86,6 +86,11 @@ ${color1}${font Draid Sans Mono:size=14}${alignr}I'll be here forever$font$color
 
 ${if_running mocp}\
 ${color0}SongInfo ${hr 2}$color
+$else${if_running audacious}\
+${color0}SongInfo ${hr 2}$color
+${endif}\
+${endif}\
+${if_running mocp}
 [mocp]: $alignr$color1${moc_state}$color
  Title: $alignc$color2${moc_title}$color
   Song: $alignc$color2${moc_song}$color
@@ -102,7 +107,7 @@ $else\
 
 
 ${endif}\
-${if_running audacious}\
+${if_running audacious}
 [audacious]: $alignr$color1${audacious_status}$color
  Title: $alignc$color2${audacious_title 50}$color
 ${audacious_bar}
