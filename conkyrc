@@ -91,13 +91,21 @@ ${color0}SongInfo ${hr 2}$color
 ${endif}\
 ${endif}\
 ${if_running mocp}
-[mocp]: $alignr$color1${moc_state}$color
- Title: $alignc$color2${moc_title}$color
-  Song: $alignc$color2${moc_song}$color
-Artist: $alignc$color2${moc_artist}$color
- Album: $alignc$color2${moc_album}$color
+#[mocp]: $alignr$color1${moc_state}$color
+# Title: $alignc$color2${moc_title}$color
+#  Song: $alignc$color2${moc_song}$color
+#Artist: $alignc$color2${moc_artist}$color
+# Album: $alignc$color2${moc_album}$color
+#
+#  Time: $alignr${color EEEE44}${moc_curtime}/${moc_totaltime}$color
+# conky自带的moc API貌似有问题,所以用人工代替
+[mocp]: $alignr$color1${exec mocp -Q %state}$color
+ Title: $alignc$color2${exec mocp -Q %title}$color
+  Song: $alignc$color2${exec mocp -Q %song}$color
+Artist: $alignc$color2${exec mocp -Q %artist}$color
+ Album: $alignc$color2${exec mocp -Q %album}$color
 
-  Time: $alignr${color EEEE44}${moc_curtime}/${moc_totaltime}$color
+  Time: $alignr${color EEEE44}${exec mocp -Q %ct}/${exec mocp -Q %tt}$color
 $else\
 
 
