@@ -100,6 +100,7 @@ ${if_running mocp}
 #  Time: $alignr${color EEEE44}${moc_curtime}/${moc_totaltime}$color
 # conky自带的moc API貌似有问题,所以用人工代替
 [mocp]: $alignr$color1${exec mocp -Q %state}$color
+  File: $alignc$color2${exec mocp -Q %file | { read filename; ./getBasename.rb $filename; }}$color
  Title: $alignc$color2${exec mocp -Q %title}$color
   Song: $alignc$color2${exec mocp -Q %song}$color
 Artist: $alignc$color2${exec mocp -Q %artist}$color
