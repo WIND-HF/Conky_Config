@@ -118,7 +118,7 @@ ${endif}\
 ${if_running audacious}
 [audacious]: $alignr$color1${audacious_status}$color
  Title: $alignc$color2${audacious_title 50}$color
-${audacious_bar}
+$color2${audacious_bar}
  $alignr${color EEEE44}${audacious_position}/${audacious_length}$color
 $else\
 
