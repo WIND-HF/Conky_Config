@@ -76,15 +76,16 @@ gap_y 10
 TEXT
 $color
 ${color0}${font 方正准园_GBK:12}${exec echo '这里是上条当麻保护协会'} ${hr 2}$font$color
-${color1}${font Draid Sans Mono:size=14}${alignr}I'll be here forever$font$color
+LittleKey: ${font Draid Sans Mono:size=12}${alignr}${color1}I'll be here forever$font$color
 
-
+email: ${alignr}${color1}LittleKeyRain@gmail.com$color
 
 #${image /home/jinduan/workspace/gallery/MyPic.png -p 60,50 -s 198x200 }
 ${if_running mocp}\
 ${color0}SongInfo ${hr 2}$color
 $else${if_running audacious}\
 ${color0}SongInfo ${hr 2}$color
+$else\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
 ${endif}\
 ${endif}\
 ${if_running mocp}
@@ -104,26 +105,12 @@ Artist: $alignc$color2${exec mocp -Q %artist}$color
  Album: $alignc$color2${exec mocp -Q %album}$color
 
   Time: $alignr${color EEEE44}${exec mocp -Q %ct}/${exec mocp -Q %tt}$color
-$else\
-
-
-
-
-
-
-
-
 ${endif}\
 ${if_running audacious}
 [audacious]: $alignr$color1${audacious_status}$color
  Title: $alignc$color2${audacious_title 50}$color
 $color2${audacious_bar}
  $alignr${color EEEE44}${audacious_position}/${audacious_length}$color
-$else\
-
-
-
-
 ${endif}\
 
 #${time}
