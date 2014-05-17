@@ -80,10 +80,7 @@ ${color1}${font Draid Sans Mono:size=14}${alignr}I'll be here forever$font$color
 
 
 
-
-
 #${image /home/jinduan/workspace/gallery/MyPic.png -p 60,50 -s 198x200 }
-
 ${if_running mocp}\
 ${color0}SongInfo ${hr 2}$color
 $else${if_running audacious}\
@@ -108,6 +105,7 @@ Artist: $alignc$color2${exec mocp -Q %artist}$color
 
   Time: $alignr${color EEEE44}${exec mocp -Q %ct}/${exec mocp -Q %tt}$color
 $else\
+
 
 
 
