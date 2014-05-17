@@ -6,5 +6,5 @@ Conky_Config
 
 ## Screenshot
 
-   ![ShowDesktop_v7](https://github.com/LittleKey/gallery/blob/master/ShowDesktop_v7.png?raw=true)
+   ![ShowDesktop_v8](https://github.com/LittleKey/gallery/blob/master/ShowDesktop_v8.png?raw=true)
 
