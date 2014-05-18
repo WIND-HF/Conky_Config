@@ -13,6 +13,7 @@ Conky_Config
 ## Requirements
 
    conky 1.9(or more later) # 也许只要大于1.8 rc2就行了
+   
    Ruby 2.1 # 我只测试了这个
 
 ## Usage
@@ -25,14 +26,18 @@ Conky_Config
 ## Docments
 
    配置可以随意修改, 修改之后执行./conky conkyrc更新.
+   
 
 ### Settings
 
    全局配置, 全都写在了settings文件夹里.
 
-#### color
+##### color
 
    各种颜色的自定义设置, 不包含graph的颜色, 想修改的话需要在TEXT手动撸
+   
+   
+-------------------------------------------------------
 
 ### TEXT
 
@@ -41,20 +46,23 @@ Conky_Config
 ##### main
 
    所有信息的整体顺序(大概就是个简单排版), 以及..."上条当麻保护协会"
+   
+   
+-------------------------------------------------------
 
 ### tool
 
    包含一些不是很重要的小工具...
 
-#### getBasename
+##### getBasename
 
    用于给给SongInfo的mocp提供文件的基本文件名.
 
-#### update
+##### update
 
    用于更新所有配置.
 
    读取参数里的所有文件(可以使用bash的通配符输入多个文件),
    并输出到标准输出(自己重定向去吧~)
 
-   *p.s: 详见conky.sh*
+   *p.s: 可参考conky.sh*
