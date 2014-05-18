@@ -56,7 +56,7 @@ Conky_Config
 
 ##### getBasename
 
-   用于给给SongInfo的mocp提供文件的基本文件名.
+   用于给SongInfo的mocp提供正在播放文件的基础(base)文件名.
 
 ##### update
 
@@ -64,5 +64,8 @@ Conky_Config
 
    读取参数里的所有文件(可以使用bash的通配符输入多个文件),
    并输出到标准输出(自己重定向去吧~)
+   
+   在这里用来读取所有全局设置, 以及main.conf(这个文件控制所有TEXT的整体顺序),
+   并重定向输出到某文件, 作为conky的配置文件.
 
    *p.s: 可参考conky.sh*
