@@ -1,77 +1,100 @@
-# conky configure file for Debian.
+#2014-05-18 03:19:50 +0000
 #
-#
-# by: LittleKey (LittleKeyRain@gmail.com)
-#
-# 参考:
-#  Pengo (conky@pengo.us)
+# 自定义颜色
 #
 
-# Create own window instead of using desktop (required in nautilus)
-own_window yes
-#own_window_type override
-own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
-own_window_argb_visual yes
-#own_window_argb_value 0
-own_window_transparent yes
-own_window_colour FFFFCC
-#background no
-
-# Use double buffering (reduces flicker, may not work for everyone)
-double_buffer yes
-
-# fiddle with window
-use_spacer yes
-use_xft yes
-xftalpha 1
-
-xftfont Draid Sans Mono:size=10
-
-# Update interval in seconds
-update_interval 1
-
-#Maximum Width of Window
-maximum_width 320
-
-# Minimum size of text area
-minimum_size 320 5
-
-# Draw shades?
-draw_shades no
-
-# Text stuff
-draw_outline no # amplifies text if yes
-draw_borders no
-uppercase no # set to yes if you want all text to be in uppercase
-
-# Stippled borders?
-stippled_borders 3
-
-# border margins
-#border_margin 5
-
-# border width
-border_width 6
-
-# Default colors and also border colors, grey90 == #e5e5e5
+# 默认颜色设置
 default_color 66EEAA
 
+# colorN定义
 color0 CC9900     # title
 color1 FF3333     # tagline
 color2 EE66EE     # SongInfo
+color3 597DB2     # CPU
+color4 FF6600     # MEMORY
+color5 FFFF33     # DISK
+color6 FF0000     # Download
+color7 00FF00     # Upload
+color8 66CC00     # LOGGING
 
+#
+# 有关显示效果的杂项
+#
 
-# Text alignment, other possible values are commented
+# 阴影效果
+draw_shades no
+
+use_spacer yes
+
+draw_outline no
+
+draw_borders no
+
+# 所有字母大写
+uppercase no
+
+stippled_borders 3
+
+border_width 6
+
+#
+# 字体设置
+#
+
+# 打开xft字体支持
+use_xft yes
+
+# 字体透明
+xftalpha 1
+
+# 字体以及大小设置
+xftfont Draid Sans Mono:size=10
+
+#
+# 整体布局排版
+#
+
+# 防止闪烁
+double_buffer yes
+
+# 刷新时间(s)
+update_interval 1
+
+# 界面大小
+maximum_width 320
+minimum_size 320 5
+
+background yes
+
+# 外边距
+gap_x 10
+gap_y 10
+
+# aligment
 #alignment top_left
 alignment top_right
 #alignment bottom_left
 #alignment bottom_right
 
-# Gap between borders of screen and text
-gap_x 10
-gap_y 10
+#
+# own_window设置
+#
 
-# stuff after 鈥楾EXT鈥� will be formatted on screen
+# 打开own_window
+own_window yes
+
+# 默认为normal
+#own_window_tyoe override
+
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+# 打开透明效果
+own_window_argb_visual yes
+#own_window_argb_value 0
+own_window_transparent yes
+
+# 关闭透明效果时own_window的颜色
+own_window_colour FFFFCC
 
 TEXT
 $color
@@ -80,110 +103,33 @@ LittleKey: ${font Draid Sans Mono:size=12}${alignr}${color1}I'll be here forever
 
 email: ${alignr}${color1}LittleKeyRain@gmail.com$color
 
-#${image /home/jinduan/workspace/gallery/MyPic.png -p 60,50 -s 198x200 }
-${if_running mocp}\
-${color0}SongInfo ${hr 2}$color
-$else${if_running audacious}\
-${color0}SongInfo ${hr 2}$color
-$else\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
-${endif}\
-${endif}\
-${if_running mocp}
-#[mocp]: $alignr$color1${moc_state}$color
-# Title: $alignc$color2${moc_title}$color
-#  Song: $alignc$color2${moc_song}$color
-#Artist: $alignc$color2${moc_artist}$color
-# Album: $alignc$color2${moc_album}$color
-#
-#  Time: $alignr${color EEEE44}${moc_curtime}/${moc_totaltime}$color
-# conky自带的moc API貌似有问题,所以用人工代替
-[mocp]: $alignr$color1${exec mocp -Q %state}$color
-  File: $alignc$color2${exec mocp -Q %file | { read filename; ./getBasename.rb $filename; }}$color
- Title: $alignc$color2${exec mocp -Q %title}$color
-  Song: $alignc$color2${exec mocp -Q %song}$color
-Artist: $alignc$color2${exec mocp -Q %artist}$color
- Album: $alignc$color2${exec mocp -Q %album}$color
 
-  Time: $alignr${color EEEE44}${exec mocp -Q %ct}/${exec mocp -Q %tt}$color
-${endif}\
-${if_running audacious}
-[audacious]: $alignr$color1${audacious_status}$color
- Title: $alignc$color2${audacious_title 50}$color
-$color2${audacious_bar}
- $alignr${color EEEE44}${audacious_position}/${audacious_length}$color
+${if_existing TEXT/SongInfo.conf}\
+${include TEXT/SongInfo.conf}
 ${endif}\
 
-#${time}
-${color0}SYSTEM ${hr 2}$color
-$nodename $sysname $kernel on $machine
+${if_existing TEXT/SYSTEM.conf}\
+${include TEXT/SYSTEM.conf}
+${endif}\
 
-${color0}CPU ${hr 2}$color
-Total CPU: ${cpu cpu0}%
-${color 597DB2}${cpubar}$color
-${cpugraph 000000 597DB2}
-Core 1: ${freq 1} MHz        Temprature: $color ${exec sensors|grep 'Core 0'|awk '{print $3}'}
-${cpu cpu1}% ${color 597DB2}${cpubar cpu1}$color
-Core 2: ${freq 2} MHz        Temprature: $color ${exec sensors|grep 'Core 1'|awk '{print $3}'}
-${cpu cpu2}% ${color 597DB2}${cpubar cpu2}$color
+${if_existing TEXT/CPU.conf}\
+${include TEXT/CPU.conf}
+${endif}\
 
-NAME               PID   CPU%   MEM%
-${color CCFFFF}${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
-${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
-${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
-${top name 4} ${top pid 4} ${top cpu 4} ${top mem 4}$color
+${if_existing TEXT/MEMORY.conf}\
+${include TEXT/MEMORY.conf}
+${endif}\
 
-${color0}MEMORY ${hr 2}$color
-RAM Used: ${mem}    RAM Free: ${memfree}/ ${memmax}
- RAM: $memperc%  ${color FF6600} ${membar 6}$color
-Swap: $swapperc%   ${color FF6600} ${swapbar 6}$color
+${if_existing TEXT/DISK.conf}\
+${include TEXT/DISK.conf}
+${endif}\
 
-${color0}DISK ${hr 2}$color
-${diskiograph 000000 EEEE44}
-NAME  Type   Read    Write ${alignr}USED(%)
-${color FFFF33}\
-Root ${fs_type /}: ${diskio_read /dev/sda6} ${diskio_write /dev/sda6} \
-${alignr}${fs_used /}(${fs_used_perc /}%)
-${fs_bar /}
-${color FFFF33}Home   ${fs_type /home}: ${diskio_read /dev/sda8} ${diskio_write /dev/sda8} \
-${alignr}${fs_used /home}(${fs_used_perc /home}%)
-${fs_bar /home}\
-$color
-#eth1
-${if_up eth1}\
-${color0}NETWORK (${addr eth1}) ${hr 2}$color
-Down: $color${downspeed eth1} ${alignr}Up: ${upspeed eth1}
-${downspeedgraph eth1 25,140 000000 ff0000} ${alignr}${upspeedgraph eth1
-25,140 000000 00ff00}$color
-Total: ${totaldown eth1} ${alignr}Total: ${totalup eth1}
-Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768
-61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}\
-${endif}
-# eth2
-${if_up eth2}\
-${color0}NETWORK (${addr eth2}) ${hr 2}$color
-Down: $color${downspeed eth2} ${alignr}Up: ${upspeed eth2}
-${downspeedgraph eth2 25,140 000000 ff0000} ${alignr}${upspeedgraph eth2
-25,140 000000 00ff00}$color
-Total: ${totaldown eth2} ${alignr}Total: ${totalup eth2}
-Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768
-61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}\
-${endif}
-# eth3
-${if_up eth3}\
-${color0}NETWORK (${addr eth3}) ${hr 2}$color
-Down: $color${downspeed eth3} ${alignr}Up: ${upspeed eth3}
-${downspeedgraph eth3 25,140 000000 ff0000} ${alignr}${upspeedgraph eth3
-25,140 000000 00ff00}$color
-Total: ${totaldown eth3} ${alignr}Total: ${totalup eth3}
-Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768
-61000 count}${alignr}Total: ${tcp_portmon 1 65535 count}\
-${endif}
-# LOGGINE
-${color0}LOGGING ${hr 2}$color
-${if_running sslocal}\
-Shadowsock:
-${color 66CC00}\
-${execi 30 tail -n3 /home/jinduan/CrossFirewall/nohup.out | fold -w50}\
-$color\
-$endif\
+${if_existing TEXT/NETWORK.conf}\
+${include TEXT/NETWORK.conf}
+${endif}\
+
+${if_existing TEXT/LOGGING.conf}\
+${include TEXT/LOGGING.conf}
+${endif}\
+
 
