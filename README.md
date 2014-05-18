@@ -18,7 +18,6 @@ Conky_Config
 
 ## Usage
 
-    ln -s Conky_Config ~/.conky && cd ~/.conky
     nohup ./conky conkyrc &
 
    conkyrc: 生成的配置文件名(如果存在同名文件会备份到当前文件价下并加上old前缀)
